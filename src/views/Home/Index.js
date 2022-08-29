@@ -16,6 +16,8 @@ import WhyChoose from '../../component/WhyChoose'
 import GImagesFive from '../../component/GImagesFive'
 
 import BtnLink from '../../component/BtnLink'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 function Index() {
 const Petloo = [
@@ -36,32 +38,59 @@ const Petloo = [
   }
 ]
 
-const HomeFeaturedlo = [
-  {
-    HFimag : 'p-1.png',
-    HFHeadingH3 : 'Dry Food',
-    HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
-    HFProPriceH4 : '$45.00',
-    HFLinkPathMain : 'product-detail.php',
-    HFButtinLink: 'HFLinkPathMain',
-  },
-  {
-    HFimag : 'p-2.png',
-    HFHeadingH3 : 'Dry Food',
-    HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
-    HFProPriceH4 : '$45.00',
-    HFLinkPathMain : 'product-detail.php',
-    HFButtinLink: 'HFLinkPathMain',
-  },
-  {
-    HFimag : 'p-3.png',
-    HFHeadingH3 : 'Dry Food',
-    HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
-    HFProPriceH4 : '$45.00',
-    HFLinkPathMain : 'product-detail.php',
-    HFButtinLink: 'HFLinkPathMain',
+
+
+const [state,setState]=useState()
+useEffect(() => {
+  async function getData() {
+    const response = await fetch(
+      `https://jsonplaceholder.typicode.com/photos?_limit=3`
+    )
+    let actualData = await response.json();
+    setState(actualData)
   }
-]
+  getData()
+}, []);
+
+  // useEffect(()=>{
+  //   fetch('')
+  //   .then(response => response.json())
+  //   .then(data =>  
+  //     {
+  //       console.log(data)
+  //       setState(data)
+  //     }
+  //     ) 
+  // },[])
+
+
+
+// const HomeFeaturedlo = [
+//   {
+//     HFimag : 'p-1.png',
+//     HFHeadingH3 : 'Dry Food',
+//     HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
+//     HFProPriceH4 : '$45.00',
+//     HFLinkPathMain : 'product-detail.php',
+//     HFButtinLink: 'HFLinkPathMain',
+//   },
+//   {
+//     HFimag : 'p-2.png',
+//     HFHeadingH3 : 'Dry Food',
+//     HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
+//     HFProPriceH4 : '$45.00',
+//     HFLinkPathMain : 'product-detail.php',
+//     HFButtinLink: 'HFLinkPathMain',
+//   },
+//   {
+//     HFimag : 'p-3.png',
+//     HFHeadingH3 : 'Dry Food',
+//     HFPara : 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor',
+//     HFProPriceH4 : '$45.00',
+//     HFLinkPathMain : 'product-detail.php',
+//     HFButtinLink: 'HFLinkPathMain',
+//   }
+// ]
 
 const HomeExpelo =[
   {
@@ -158,7 +187,7 @@ const HCLogoLo =[
 const WCH =
     {
         WCHeadingH4:'WHY CHOOSE US',
-        WCHeadingH2:'Experience &amp; Trust Built For 20 Years',
+        WCHeadingH2:'Experience & Trust Built For 20 Years',
         WCPara:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed.',
         WCBtnPath:'#_',
         WCBtnClass:'d-inline-block general-btn mr-1 mt-lg-4 mt-3 wow fadeInUp',
@@ -170,7 +199,7 @@ const WCH =
 const AboutUs =
   {
       WCHeadingH4:'ABOUT US',
-      WCHeadingH2:'Experience &amp; Trust Built For 20 Years',
+      WCHeadingH2:'Experience & Trust Built For 20 Years',
       WCPara:'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed.',
       WCBtnPath:'#_',
       WCBtnClass:'d-inline-block general-btn mr-1 mt-lg-4 mt-3 wow fadeInUp',
@@ -286,9 +315,9 @@ const GIFImagesBann = {
                   <h2 className="main-heading">Our Featured Products</h2>
                 </div>
                   {
-                   HomeFeaturedlo.map((item) => {
+                   state?.map((item) => {
                     return(
-                      <HomeFeatured data={item}/>
+                       <HomeFeatured data={item}/> 
                     )
                    }) 
                   }
